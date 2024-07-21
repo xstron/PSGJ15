@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://pjnoglfvklms"]
 
 [ext_resource type="PackedScene" uid="uid://bx5urub324ieo" path="res://scenes/component_health.tscn" id="1_v5vuk"]
-[ext_resource type="Script" path="res://scripts/enemy_controller.gd" id="1_wldaw"]
+[ext_resource type="Script" path="res://Scripts/enemy_controller.gd" id="1_wldaw"]
 [ext_resource type="PackedScene" uid="uid://c41p0t02gfugw" path="res://scenes/component_hitbox.tscn" id="2_4wauo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aq5xx"]

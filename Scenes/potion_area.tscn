@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjx1itv443jre"]
 
-[ext_resource type="Script" path="res://scripts/potion_area.gd" id="1_a4jf3"]
-[ext_resource type="PackedScene" uid="uid://bnvc66ohoh8v5" path="res://scenes/component_attack.tscn" id="2_0ahnn"]
+[ext_resource type="Script" path="res://Scripts/potion_area.gd" id="1_a4jf3"]
+[ext_resource type="PackedScene" uid="uid://bnvc66ohoh8v5" path="res://Scenes/component_attack.tscn" id="2_0ahnn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptyd6"]
 radius = 256.0
