@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 50
-@export var acceleration: float =  5
+@export var speed: float = 100
 
 @export var health: int = 100
 
@@ -15,7 +14,7 @@ var selected_potion: int = -1 :
 		queue_redraw()
 		selected_potion = value
 
-@export var POTION_AREA_SCENE: PackedScene
+const POTION_AREA_SCENE: PackedScene = preload("res://Scenes/potion_area.tscn")
 
 func _ready():
 	$HealthComponent.health = health
@@ -26,8 +25,7 @@ func _process(_delta: float):
 func _physics_process(_delta: float):
 	var direction: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
 	
-	velocity.x = move_toward(velocity.x, speed*direction.x, acceleration)
-	velocity.y = move_toward(velocity.y, speed*direction.y, acceleration)
+	velocity = direction * speed
 
 	move_and_slide()
 
@@ -54,4 +52,4 @@ func _input(event: InputEvent):
 
 func _draw():
 	if draw_potion_hint:
-		draw_arc(get_global_mouse_position() - global_position, 128.0, 0.0 * PI, 2.0 * PI, 100, Color.CORNFLOWER_BLUE, -1.0, false)
+		draw_arc(get_global_mouse_position() - global_position, 32.0, 0.0 * PI, 2.0 * PI, 100, Color.CORNFLOWER_BLUE, -1.0, false)

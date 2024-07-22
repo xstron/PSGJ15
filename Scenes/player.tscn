@@ -1,22 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://dntwc4ecx5goy"]
+[gd_scene load_steps=7 format=3 uid="uid://dntwc4ecx5goy"]
 
 [ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_f5x2b"]
-[ext_resource type="PackedScene" uid="uid://bjx1itv443jre" path="res://scenes/potion_area.tscn" id="2_glkan"]
-[ext_resource type="Texture2D" uid="uid://d25g0u1itknqf" path="res://assets/icon.svg" id="2_kibdi"]
-[ext_resource type="PackedScene" uid="uid://bx5urub324ieo" path="res://scenes/component_health.tscn" id="3_ut6th"]
-[ext_resource type="PackedScene" uid="uid://c41p0t02gfugw" path="res://scenes/component_hitbox.tscn" id="4_r4b4w"]
+[ext_resource type="Texture2D" uid="uid://d25g0u1itknqf" path="res://Assets/icon.svg" id="2_kibdi"]
+[ext_resource type="PackedScene" uid="uid://bx5urub324ieo" path="res://Scenes/component_health.tscn" id="3_ut6th"]
+[ext_resource type="PackedScene" uid="uid://c41p0t02gfugw" path="res://Scenes/component_hitbox.tscn" id="4_r4b4w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kupff"]
-size = Vector2(100, 100)
+size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gh5oo"]
-size = Vector2(118, 118)
+size = Vector2(10, 10)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_f5x2b")
-POTION_AREA_SCENE = ExtResource("2_glkan")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ut6th")]
 damage_modifiers = {
@@ -37,4 +35,5 @@ debug_color = Color(1, 0.6, 0.701961, 0.419608)
 shape = SubResource("RectangleShape2D_gh5oo")
 
 [node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
 texture = ExtResource("2_kibdi")

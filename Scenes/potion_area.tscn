@@ -2,14 +2,19 @@
 
 [ext_resource type="Script" path="res://Scripts/potion_area.gd" id="1_a4jf3"]
 [ext_resource type="PackedScene" uid="uid://bnvc66ohoh8v5" path="res://Scenes/component_attack.tscn" id="2_0ahnn"]
+[ext_resource type="Texture2D" uid="uid://d25g0u1itknqf" path="res://Assets/icon.svg" id="3_uy8px"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptyd6"]
-radius = 256.0
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_64gvx"]
+radius = 32.0
 
 [node name="PotionArea" type="Node2D"]
 script = ExtResource("1_a4jf3")
+radius = 32.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.282353, 0, 1, 1)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("3_uy8px")
 
 [node name="AttackComponent" parent="." instance=ExtResource("2_0ahnn")]
 collision_layer = 16
@@ -20,11 +25,6 @@ shape = SubResource("CircleShape2D_ptyd6")
 
 [node name="DurationTimer" type="Timer" parent="."]
 wait_time = 5.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.282353, 0, 1, 1)
-scale = Vector2(256, 256)
-texture = SubResource("CanvasTexture_64gvx")
 
 [node name="TickTimer" type="Timer" parent="."]
 wait_time = 0.5

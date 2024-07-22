@@ -84,3 +84,7 @@ Interact={
 2d_physics/layer_3="Obstacles"
 2d_physics/layer_4="Hitboxes"
 2d_physics/layer_5="Attacks"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

@@ -1,16 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://pjnoglfvklms"]
+[gd_scene load_steps=8 format=3 uid="uid://pjnoglfvklms"]
 
-[ext_resource type="PackedScene" uid="uid://bx5urub324ieo" path="res://scenes/component_health.tscn" id="1_v5vuk"]
+[ext_resource type="PackedScene" uid="uid://bx5urub324ieo" path="res://Scenes/component_health.tscn" id="1_v5vuk"]
 [ext_resource type="Script" path="res://Scripts/enemy_controller.gd" id="1_wldaw"]
-[ext_resource type="PackedScene" uid="uid://c41p0t02gfugw" path="res://scenes/component_hitbox.tscn" id="2_4wauo"]
+[ext_resource type="PackedScene" uid="uid://c41p0t02gfugw" path="res://Scenes/component_hitbox.tscn" id="2_4wauo"]
+[ext_resource type="Texture2D" uid="uid://d25g0u1itknqf" path="res://Assets/icon.svg" id="4_1kebe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aq5xx"]
-size = Vector2(118, 118)
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gss60"]
-size = Vector2(128, 128)
+size = Vector2(16, 16)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_3jv6h"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_1yt00"]
+radius = 64.0
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -31,5 +33,22 @@ shape = SubResource("RectangleShape2D_gss60")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
-scale = Vector2(128, 128)
-texture = SubResource("CanvasTexture_3jv6h")
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("4_1kebe")
+
+[node name="Pathfinding" type="Node2D" parent="."]
+
+[node name="DetectionArea" type="Area2D" parent="Pathfinding"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pathfinding/DetectionArea"]
+shape = SubResource("CircleShape2D_1yt00")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Pathfinding"]
+
+[node name="PathfindingUpdateTimer" type="Timer" parent="Pathfinding"]
+wait_time = 0.1
+
+[connection signal="body_entered" from="Pathfinding/DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Pathfinding/DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="Pathfinding/PathfindingUpdateTimer" to="." method="_on_pathfinding_update_timer_timeout"]
