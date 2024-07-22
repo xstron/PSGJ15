@@ -21,17 +21,29 @@ func _physics_process(_delta):
 
 
 func _on_detection_area_body_entered(body):
+<<<<<<< HEAD
+=======
+	print("player entered")
+>>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 	target = body
 	$Pathfinding/PathfindingUpdateTimer.start()
 
 
 func _on_detection_area_body_exited(_body):
+<<<<<<< HEAD
+=======
+	print("player left")
+>>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 	target = null
 	$Pathfinding/PathfindingUpdateTimer.stop()
 
 
 func _on_pathfinding_update_timer_timeout():
 	if target != null:
+<<<<<<< HEAD
+=======
+		print("recalculating path")
+>>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 		nav_agent.target_position = target.global_position
 	else:
 		nav_agent.target_position = global_position

@@ -1,6 +1,10 @@
 extends CharacterBody2D
 
 @export var speed: float = 100
+<<<<<<< HEAD
+=======
+
+>>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 @export var health: int = 100
 
 const POTION_AREA_SCENE: PackedScene = preload("res://Scenes/potion_area.tscn")
@@ -15,8 +19,12 @@ var selected_potion: int = -1 :
 		queue_redraw()
 		selected_potion = value
 
+<<<<<<< HEAD
 @onready var interaction_area = $InteractionArea
 var interaction_current: InteractionComponent = null
+=======
+const POTION_AREA_SCENE: PackedScene = preload("res://Scenes/potion_area.tscn")
+>>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 
 func _ready():
 	$HealthComponent.health = health
@@ -69,7 +77,10 @@ func _input(event: InputEvent):
 func _draw():
 	if draw_potion_hint:
 		draw_arc(get_global_mouse_position() - global_position, 32.0, 0.0 * PI, 2.0 * PI, 100, Color.CORNFLOWER_BLUE, -1.0, false)
+<<<<<<< HEAD
 
 
 func _on_interaction_area_area_exited(area):
 	(area as InteractionComponent).icon_hide()
+=======
+>>>>>>> 599f37054802e081b6168744d20d795bad65df4d

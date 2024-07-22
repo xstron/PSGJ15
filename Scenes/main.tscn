@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 [gd_scene load_steps=9 format=3 uid="uid://b314m0xtp0dc6"]
+=======
+[gd_scene load_steps=8 format=3 uid="uid://b314m0xtp0dc6"]
+>>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 
 [ext_resource type="PackedScene" uid="uid://dntwc4ecx5goy" path="res://Scenes/player.tscn" id="1_ahu8t"]
 [ext_resource type="PackedScene" uid="uid://pjnoglfvklms" path="res://Scenes/enemy.tscn" id="2_bxt7a"]
 [ext_resource type="Texture2D" uid="uid://st8her0u40mg" path="res://Assets/tileset2.png" id="3_msq75"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://c1g0abc3f50du" path="res://Scenes/chest.tscn" id="4_ahhqd"]
+=======
+>>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_173ki"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -171,9 +178,12 @@ health = 10
 [node name="Enemy3" parent="Entities" instance=ExtResource("2_bxt7a")]
 position = Vector2(27, -74)
 health = 10
+<<<<<<< HEAD
 
 [node name="Chest1" parent="." instance=ExtResource("4_ahhqd")]
 position = Vector2(-75, -46)
 
 [node name="Chest2" parent="." instance=ExtResource("4_ahhqd")]
 position = Vector2(-110, -45)
+=======
+>>>>>>> 599f37054802e081b6168744d20d795bad65df4d
