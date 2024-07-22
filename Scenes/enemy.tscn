@@ -8,12 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aq5xx"]
 size = Vector2(16, 16)
 
-<<<<<<< HEAD
 [sub_resource type="CircleShape2D" id="CircleShape2D_urams"]
-=======
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gss60"]
-size = Vector2(16, 16)
->>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1yt00"]
 radius = 64.0
@@ -51,10 +46,7 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_1yt00")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Pathfinding"]
-<<<<<<< HEAD
 target_desired_distance = 5.0
-=======
->>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 
 [node name="PathfindingUpdateTimer" type="Timer" parent="Pathfinding"]
 wait_time = 0.1

@@ -84,10 +84,7 @@ Interact={
 2d_physics/layer_3="Obstacles"
 2d_physics/layer_4="Hitboxes"
 2d_physics/layer_5="Attacks"
-<<<<<<< HEAD
 2d_physics/layer_6="Interactions"
-=======
->>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 
 [rendering]
 

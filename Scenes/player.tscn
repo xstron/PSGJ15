@@ -8,15 +8,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kupff"]
 size = Vector2(10, 10)
 
-<<<<<<< HEAD
 [sub_resource type="CircleShape2D" id="CircleShape2D_r7yao"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_de8lt"]
 radius = 16.0
-=======
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gh5oo"]
-size = Vector2(10, 10)
->>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -42,11 +37,7 @@ debug_color = Color(1, 0.6, 0.701961, 0.419608)
 shape = SubResource("CircleShape2D_r7yao")
 
 [node name="Icon" type="Sprite2D" parent="."]
-<<<<<<< HEAD
 scale = Vector2(0.140625, 0.140625)
-=======
-scale = Vector2(0.125, 0.125)
->>>>>>> 599f37054802e081b6168744d20d795bad65df4d
 texture = ExtResource("2_kibdi")
 
 [node name="InteractionArea" type="Area2D" parent="."]
