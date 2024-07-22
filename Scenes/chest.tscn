@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1g0abc3f50du"]
+
+[ext_resource type="PackedScene" uid="uid://bchnfhn0587tw" path="res://Scenes/component_interaction.tscn" id="1_o48yy"]
+[ext_resource type="Texture2D" uid="uid://d25g0u1itknqf" path="res://Assets/icon.svg" id="2_eut5q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q3fnq"]
+radius = 9.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_va01q"]
+size = Vector2(12, 12)
+
+[node name="Chest" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="InteractionComponent" parent="." node_paths=PackedStringArray("interaction_icon") instance=ExtResource("1_o48yy")]
+interaction_icon = NodePath("InteractionIcon")
+msg = "I want to have a large bouncy chest"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent"]
+shape = SubResource("CircleShape2D_q3fnq")
+
+[node name="InteractionIcon" type="Sprite2D" parent="InteractionComponent"]
+visible = false
+modulate = Color(1, 0.572549, 0.0117647, 1)
+position = Vector2(0, -11)
+rotation = 3.14159
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_eut5q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_va01q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_eut5q")

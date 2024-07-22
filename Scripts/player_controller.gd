@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-@export var speed: float = 50
-@export var acceleration: float =  5
-
+@export var speed: float = 100
 @export var health: int = 100
+
+const POTION_AREA_SCENE: PackedScene = preload("res://Scenes/potion_area.tscn")
 
 var draw_potion_hint: bool = false
 var selected_potion: int = -1 :
@@ -15,7 +15,8 @@ var selected_potion: int = -1 :
 		queue_redraw()
 		selected_potion = value
 
-@export var POTION_AREA_SCENE: PackedScene
+@onready var interaction_area = $InteractionArea
+var interaction_current: InteractionComponent = null
 
 func _ready():
 	$HealthComponent.health = health
@@ -24,10 +25,19 @@ func _process(_delta: float):
 	pass
 
 func _physics_process(_delta: float):
+	var areas: Array[Area2D] = interaction_area.get_overlapping_areas()
+	if areas.size() > 0:
+		areas.sort_custom(func(a: Node2D, b: Node2D): return a.global_position.distance_squared_to(global_position) < b.global_position.distance_squared_to(global_position))
+		interaction_current = areas[0]
+		interaction_current.icon_show()
+		for area in areas.slice(1):
+			(area as InteractionComponent).icon_hide()
+	else:
+		interaction_current = null
+	
 	var direction: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
 	
-	velocity.x = move_toward(velocity.x, speed*direction.x, acceleration)
-	velocity.y = move_toward(velocity.y, speed*direction.y, acceleration)
+	velocity = direction * speed
 
 	move_and_slide()
 
@@ -51,7 +61,15 @@ func _input(event: InputEvent):
 			%PotionAreas.add_child(potion_area)
 	if event.is_action_pressed("Secondary"):
 		selected_potion = -1
+		
+	if event.is_action_pressed("Interact"):
+		if interaction_current != null:
+			interaction_current.interact()
 
 func _draw():
 	if draw_potion_hint:
-		draw_arc(get_global_mouse_position() - global_position, 128.0, 0.0 * PI, 2.0 * PI, 100, Color.CORNFLOWER_BLUE, -1.0, false)
+		draw_arc(get_global_mouse_position() - global_position, 32.0, 0.0 * PI, 2.0 * PI, 100, Color.CORNFLOWER_BLUE, -1.0, false)
+
+
+func _on_interaction_area_area_exited(area):
+	(area as InteractionComponent).icon_hide()
