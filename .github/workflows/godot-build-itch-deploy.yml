@@ -13,7 +13,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y curl
-          curl -L -o release.zip ${{ github.event.release.assets[0].browser_download_url }}
+          curl -LO $(curl -s https://api.github.com/repos/xstron/PSGJ15/releases/latest | grep "browser_download_url.*\.zip" | cut -d : -f 2,3 | tr -d \")
 
       - name: Export to itch
         uses: manleydev/butler-publish-itchio-action@v1.0.3
