@@ -1,0 +1,50 @@
+name: "Build a Godot project and export it to itch.io"
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: 4.2.2
+  EXPORT_NAME: PSGJ15
+
+jobs:
+  build-and-export:
+    name: Build and Export
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare directories
+        run: |
+          mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mkdir -p build/web
+
+      - name: Get Godot
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget -q -O godot.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip
+          unzip -q godot.zip
+          mv Godot_v${GODOT_VERSION}-stable_linux_headless.64 godot
+          chmod +x godot
+          sudo mv godot /usr/local/bin
+          godot --version
+
+      - name: Get Godot export templates
+        run: |
+          wget -q -O templates.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          unzip -q templates.zip
+          mv templates ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: godot -v --export "HTML5" ./build/web/index.html
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: ./build/web/
