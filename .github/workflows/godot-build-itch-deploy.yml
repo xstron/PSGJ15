@@ -24,8 +24,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip
-          wget -q -O godot.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
-          unzip -q godot.zip
+          wget -O godot.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+          unzip godot.zip
           mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 godot
           chmod +x godot
           sudo mv godot /usr/local/bin
@@ -33,15 +33,15 @@ jobs:
 
       - name: Get Godot export templates
         run: |
-          wget -q -O templates.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
-          unzip -q templates.zip
+          wget -O templates.zip https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          unzip templates.zip
           mv templates ~/.local/share/godot/templates/${GODOT_VERSION}.stable
 
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Build
-        run: godot -v --export "HTML5" ./build/web/index.html
+        run: godot -v --export-release "Web" ./build/web/index.html
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
