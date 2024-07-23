@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1g0abc3f50du"]
+[gd_scene load_steps=6 format=3 uid="uid://c1g0abc3f50du"]
 
+[ext_resource type="Script" path="res://Scripts/chest.gd" id="1_0nlev"]
 [ext_resource type="PackedScene" uid="uid://bchnfhn0587tw" path="res://Scenes/component_interaction.tscn" id="1_o48yy"]
 [ext_resource type="Texture2D" uid="uid://d25g0u1itknqf" path="res://Assets/icon.svg" id="2_eut5q"]
 
@@ -12,10 +13,10 @@ size = Vector2(12, 12)
 [node name="Chest" type="StaticBody2D"]
 collision_layer = 4
 collision_mask = 0
+script = ExtResource("1_0nlev")
 
 [node name="InteractionComponent" parent="." node_paths=PackedStringArray("interaction_icon") instance=ExtResource("1_o48yy")]
 interaction_icon = NodePath("InteractionIcon")
-msg = "I want to have a large bouncy chest"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent"]
 shape = SubResource("CircleShape2D_q3fnq")
@@ -35,3 +36,5 @@ shape = SubResource("RectangleShape2D_va01q")
 modulate = Color(1, 1, 0, 1)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_eut5q")
+
+[connection signal="interaction_signal" from="InteractionComponent" to="." method="say_something"]

@@ -1,11 +1,12 @@
 extends Area2D
 class_name InteractionComponent
 
+signal interaction_signal
+
 @export var interaction_icon: Node2D
-@export var msg: String
 
 func interact():
-	print(msg)
+	interaction_signal.emit()
 
 
 func icon_show():
