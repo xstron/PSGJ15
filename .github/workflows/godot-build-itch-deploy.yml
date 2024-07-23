@@ -13,7 +13,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y curl
-        curl -L -o release.zip ${{ github.event.release.zipball_url }}
+        curl -L -o release.zip ${{ github.event.release..assets[0].browser_download_url }}
         
     - name: Export to itch
       uses: manleydev/butler-publish-itchio-action@v1.0.3
