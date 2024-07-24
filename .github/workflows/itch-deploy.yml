@@ -1,0 +1,23 @@
+name: "Export to itch.io after publishing a release"
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  itch-export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Export to itch
+        uses: manleydev/butler-publish-itchio-action@v1.0.3
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_API_KEY }}
+          CHANNEL: web
+          ITCH_GAME: a-title-that-incorporates-neither-shadows-nor-alchemy
+          ITCH_USER: beyondredacted
+          PACKAGE: Build/PSGJ15.zip
