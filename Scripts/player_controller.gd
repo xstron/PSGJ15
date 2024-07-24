@@ -2,7 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed: float = 100
-@export var health: int = 100
+@export var health: int = 5
+
 
 const POTION_AREA_SCENE: PackedScene = preload("res://Scenes/potion_area.tscn")
 
@@ -21,6 +22,8 @@ var interaction_current: InteractionComponent = null
 
 func _ready():
 	$HealthComponent.health = health
+
+
 	
 func _process(_delta: float):
 	pass
@@ -74,3 +77,10 @@ func _draw():
 
 func _on_interaction_area_area_exited(area):
 	(area as InteractionComponent).icon_hide()
+
+
+func _on_hitbox_area_entered(area):
+	if area.name == "Hitbox":
+		health -= 1
+		if health >= 0: 
+			print(health)
