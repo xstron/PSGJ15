@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b314m0xtp0dc6"]
+[gd_scene load_steps=9 format=3 uid="uid://b314m0xtp0dc6"]
 
 [ext_resource type="PackedScene" uid="uid://dntwc4ecx5goy" path="res://Scenes/player.tscn" id="1_ahu8t"]
 [ext_resource type="Texture2D" uid="uid://d24jsbo1v3psp" path="res://Assets/tileset3.png" id="1_sn5qr"]
@@ -297,12 +297,6 @@ terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_5qroi")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3hec"]
-size = Vector2(18, 18)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vi8g"]
-size = Vector2(16, 16)
-
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -326,37 +320,17 @@ unique_name_in_owner = true
 [node name="Camera2D" type="Camera2D" parent="Entities/Player"]
 zoom = Vector2(4, 4)
 
-[node name="Hitbox" type="Area2D" parent="Entities/Player"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Player/Hitbox"]
-shape = SubResource("RectangleShape2D_s3hec")
-
 [node name="Enemy1" parent="Entities" instance=ExtResource("2_bxt7a")]
 position = Vector2(67, 50)
 health = 20
-
-[node name="Hitbox" type="Area2D" parent="Entities/Enemy1"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy1/Hitbox"]
-shape = SubResource("RectangleShape2D_6vi8g")
 
 [node name="Enemy2" parent="Entities" instance=ExtResource("2_bxt7a")]
 position = Vector2(-112, 41)
 health = 10
 
-[node name="Hitbox" type="Area2D" parent="Entities/Enemy2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy2/Hitbox"]
-shape = SubResource("RectangleShape2D_6vi8g")
-
 [node name="Enemy3" parent="Entities" instance=ExtResource("2_bxt7a")]
 position = Vector2(27, -74)
 health = 10
-
-[node name="Hitbox" type="Area2D" parent="Entities/Enemy3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy3/Hitbox"]
-shape = SubResource("RectangleShape2D_6vi8g")
 
 [node name="Chest1" parent="." instance=ExtResource("4_ahhqd")]
 position = Vector2(-75, -46)
@@ -365,5 +339,3 @@ msg = "1 I want to have a large bouncy chest."
 [node name="Chest2" parent="." instance=ExtResource("4_ahhqd")]
 position = Vector2(-110, -45)
 msg = "2 I want to have a large bouncy chest."
-
-[connection signal="area_entered" from="Entities/Player/Hitbox" to="Entities/Player" method="_on_hitbox_area_entered"]

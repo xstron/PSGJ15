@@ -1,21 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://dntwc4ecx5goy"]
+[gd_scene load_steps=9 format=3 uid="uid://dntwc4ecx5goy"]
 
 [ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_f5x2b"]
 [ext_resource type="Texture2D" uid="uid://d25g0u1itknqf" path="res://Assets/icon.svg" id="2_kibdi"]
 [ext_resource type="PackedScene" uid="uid://bx5urub324ieo" path="res://Scenes/component_health.tscn" id="3_ut6th"]
 [ext_resource type="PackedScene" uid="uid://c41p0t02gfugw" path="res://Scenes/component_hitbox.tscn" id="4_r4b4w"]
+[ext_resource type="PackedScene" uid="uid://b27f12hhekm8r" path="res://Scenes/healthabr.tscn" id="5_p280s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kupff"]
-size = Vector2(10, 10)
+size = Vector2(18, 18)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r7yao"]
-radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_de8lt"]
 radius = 16.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 6
+collision_layer = 9
+collision_mask = 10
 motion_mode = 1
 script = ExtResource("1_f5x2b")
 
@@ -28,6 +29,8 @@ damage_modifiers = {
 }
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_r4b4w")]
+collision_layer = 9
+collision_mask = 10
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -47,4 +50,11 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_de8lt")
 
+[node name="HealthBar" parent="." instance=ExtResource("5_p280s")]
+offset_left = -158.0
+offset_top = -84.0
+offset_right = -158.0
+offset_bottom = -84.0
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]

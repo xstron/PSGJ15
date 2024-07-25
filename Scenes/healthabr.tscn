@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b27f12hhekm8r"]
+
+[ext_resource type="Script" path="res://Scripts/healthabr.gd" id="1_i5jcn"]
+[ext_resource type="Texture2D" uid="uid://c2otn8cqnv11q" path="res://Assets/health_under(1).png" id="1_lgydm"]
+[ext_resource type="Texture2D" uid="uid://bmmlkupaoino" path="res://Assets/health_over.png" id="2_upuvi"]
+
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i5jcn")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+z_index = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+max_value = 50.0
+fill_mode = 2
+texture_under = ExtResource("1_lgydm")
+texture_progress = ExtResource("2_upuvi")

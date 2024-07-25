@@ -23,3 +23,5 @@ var damage_types: Array[String] = ["Fire","Ice","Poison","Something"]
 
 func take_damage(damage: int, type: String):
 	health -= damage * damage_modifiers.get(type)
+	
+

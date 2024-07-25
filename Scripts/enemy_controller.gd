@@ -10,6 +10,7 @@ var target: Node2D
 
 func _ready():
 	$HealthComponent.health = health
+	
 
 func _physics_process(_delta):
 	if nav_agent.is_navigation_finished():
@@ -35,3 +36,6 @@ func _on_pathfinding_update_timer_timeout():
 		nav_agent.target_position = target.global_position
 	else:
 		nav_agent.target_position = global_position
+
+
+
