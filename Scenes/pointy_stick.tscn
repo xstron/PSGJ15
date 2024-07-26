@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg5o48iug614v"]
+
+[ext_resource type="Texture2D" uid="uid://d3j4dao83c8rn" path="res://Assets/sword_player.png" id="1_eq1n7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ienid"]
+size = Vector2(3.27665, 9.8514)
+
+[node name="PointyStick" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_eq1n7")
+offset = Vector2(22.695, -23.735)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, -5)
+rotation = 0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ienid")

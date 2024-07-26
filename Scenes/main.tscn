@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d24jsbo1v3psp" path="res://Assets/tileset3.png" id="1_sn5qr"]
 [ext_resource type="PackedScene" uid="uid://pjnoglfvklms" path="res://Scenes/enemy.tscn" id="2_bxt7a"]
 [ext_resource type="PackedScene" uid="uid://c1g0abc3f50du" path="res://Scenes/chest.tscn" id="4_ahhqd"]
-[ext_resource type="PackedScene" uid="uid://c4wtkoosvpx1l" path="res://Scenes/knight.tscn" id="4_cp3xa"]
+[ext_resource type="PackedScene" path="res://Scenes/knight.tscn" id="4_cp3xa"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ftvpe"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -396,19 +396,19 @@ unique_name_in_owner = true
 zoom = Vector2(4, 4)
 
 [node name="Enemy1" parent="Entities" instance=ExtResource("2_bxt7a")]
-position = Vector2(67, 50)
+position = Vector2(178, 149)
 health = 20
 
 [node name="Enemy2" parent="Entities" instance=ExtResource("2_bxt7a")]
-position = Vector2(-112, 41)
+position = Vector2(-151, 154)
 health = 10
 
 [node name="Enemy3" parent="Entities" instance=ExtResource("2_bxt7a")]
-position = Vector2(27, -74)
+position = Vector2(187, -125)
 health = 10
 
 [node name="Knight" parent="Entities" instance=ExtResource("4_cp3xa")]
-position = Vector2(-92, -64)
+position = Vector2(-171, -125)
 
 [node name="Chest1" parent="." instance=ExtResource("4_ahhqd")]
 position = Vector2(-75, -46)
