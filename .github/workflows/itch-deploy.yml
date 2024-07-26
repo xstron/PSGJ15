@@ -18,6 +18,6 @@ jobs:
         env:
           BUTLER_CREDENTIALS: ${{ secrets.ITCH_API_KEY }}
           CHANNEL: web
-          ITCH_GAME: a-title-that-incorporates-neither-shadows-nor-alchemy
+          ITCH_GAME: the-rising-of-the-goblin-lord
           ITCH_USER: beyondredacted
           PACKAGE: Build/PSGJ15.zip

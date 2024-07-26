@@ -29,7 +29,6 @@ var interaction_current: InteractionComponent = null
 func _ready():
 	$HealthComponent.health = health
 
-
 	
 func _process(_delta: float):
 	pass
