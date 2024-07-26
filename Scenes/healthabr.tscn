@@ -13,12 +13,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i5jcn")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = ExtResource("1_lgydm")
+
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 z_index = 1
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 21.0
+offset_top = 25.0
+offset_right = 39.0
+offset_bottom = 58.0
 max_value = 50.0
 fill_mode = 2
-texture_under = ExtResource("1_lgydm")
 texture_progress = ExtResource("2_upuvi")
