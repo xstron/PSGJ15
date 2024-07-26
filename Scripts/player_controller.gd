@@ -3,13 +3,15 @@ class_name Player
 
 @export var speed: float = 100
 @export var health: float = 50
+@export var max_cast_distance: float = 50
 @onready var current_health = health 
 @onready var health_progress = 0
 
 
-
+@onready var animated = $AnimatedSprite2D
 
 const POTION_AREA_SCENE: PackedScene = preload("res://Scenes/potion_area.tscn")
+var can_cast: bool = true
 
 var draw_potion_hint: bool = false
 var selected_potion: int = -1 :
@@ -44,6 +46,28 @@ func _physics_process(_delta: float):
 		interaction_current = null
 	
 	var direction: Vector2 = Input.get_vector("Left", "Right", "Up", "Down")
+
+	if direction.x == 0:
+		if direction.y == 0:
+			animated.play("default")
+		if direction.y < 0:
+			animated.play("run_n")
+		elif direction.y > 0:
+			animated.play("run_s")
+	elif direction.x < 0:
+		if direction.y == 0:
+			animated.play("run_w")
+		if direction.y < 0:
+			animated.play("run_nw")
+		elif direction.y > 0:
+			animated.play("run_sw")
+	elif direction.x > 0:
+		if direction.y == 0:
+			animated.play("run_e")
+		if direction.y < 0:
+			animated.play("run_ne")
+		elif direction.y > 0:
+			animated.play("run_se")
 	
 	velocity = direction * speed
 
@@ -63,10 +87,16 @@ func _input(event: InputEvent):
 		queue_redraw()
 		
 	if event.is_action_pressed("Primary"):
-		if selected_potion >= 0:
+		if selected_potion >= 0 and can_cast:
 			var potion_area = POTION_AREA_SCENE.instantiate()
-			potion_area.set_position(get_global_mouse_position())
+			var pos = get_global_mouse_position()
+			var rel_pos = pos - global_position
+			if rel_pos.length() > max_cast_distance:
+				pos = global_position+  rel_pos.normalized() * max_cast_distance
+			potion_area.set_position(pos)
 			%PotionAreas.add_child(potion_area)
+			can_cast = false
+			$SpellTimer.start()
 	if event.is_action_pressed("Secondary"):
 		selected_potion = -1
 		
@@ -76,7 +106,10 @@ func _input(event: InputEvent):
 
 func _draw():
 	if draw_potion_hint:
-		draw_arc(get_global_mouse_position() - global_position, 32.0, 0.0 * PI, 2.0 * PI, 100, Color.CORNFLOWER_BLUE, -1.0, false)
+		var pos = get_global_mouse_position() - global_position
+		if pos.length() > max_cast_distance:
+			pos = pos.normalized() * max_cast_distance
+		draw_arc(pos, 32.0, 0.0 * PI, 2.0 * PI, 100, Color.WEB_PURPLE, 1.0, false)
 
 
 func _on_interaction_area_area_exited(area):
@@ -93,3 +126,7 @@ func _on_hitbox_component_area_entered(area):
 		if current_health >= 0: 
 			print(current_health)
 
+
+
+func _on_spell_timer_timeout():
+	can_cast = true

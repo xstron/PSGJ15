@@ -5,6 +5,7 @@ class_name Enemy
 @export var speed: float = 50.0
 
 @onready var nav_agent = $Pathfinding/NavigationAgent2D
+@onready var animated = $AnimatedSprite2D
 
 var target: Node2D
 
@@ -14,10 +15,35 @@ func _ready():
 
 func _physics_process(_delta):
 	if nav_agent.is_navigation_finished():
+		animated.play("default")
 		return
-
+		
 	var direction = global_position.direction_to(nav_agent.get_next_path_position())
+	
+	if direction.x == 0:
+		if direction.y == 0:
+			animated.play("default")
+		if direction.y < 0:
+			animated.play("run_n")
+		elif direction.y > 0:
+			animated.play("run_s")
+	elif direction.x < 0:
+		if direction.y == 0:
+			animated.play("run_w")
+		if direction.y < 0:
+			animated.play("run_nw")
+		elif direction.y > 0:
+			animated.play("run_sw")
+	elif direction.x > 0:
+		if direction.y == 0:
+			animated.play("run_e")
+		if direction.y < 0:
+			animated.play("run_ne")
+		elif direction.y > 0:
+			animated.play("run_se")
+	
 	velocity = direction * speed
+	
 	move_and_slide()
 
 
