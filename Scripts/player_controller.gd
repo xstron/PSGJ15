@@ -6,6 +6,9 @@ class_name Player
 @export var max_cast_distance: float = 50
 @onready var current_health = health 
 @onready var health_progress = 0
+@onready var animation = $AnimationPlayer
+@onready var weapon = $PointyStick
+var is_Attacking: bool = false
 
 
 @onready var animated = $AnimatedSprite2D
@@ -28,7 +31,7 @@ var interaction_current: InteractionComponent = null
 
 func _ready():
 	$HealthComponent.health = health
-
+	weapon.visible = false
 	
 func _process(_delta: float):
 	pass
@@ -87,6 +90,9 @@ func _input(event: InputEvent):
 		
 	if event.is_action_pressed("Primary"):
 		if selected_potion >= 0 and can_cast:
+			current_health -= 8
+			health_progress += 8
+			$HealthBar.set_value(health_progress)
 			var potion_area = POTION_AREA_SCENE.instantiate()
 			var pos = get_global_mouse_position()
 			var rel_pos = pos - global_position
@@ -102,6 +108,16 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("Interact"):
 		if interaction_current != null:
 			interaction_current.interact()
+	
+	if event. is_action_pressed("Attack"):
+		animation.play("Attack_Save_Me")
+		is_Attacking = true
+		weapon.visible = true
+		await animation.animation_finished
+		weapon.visible = false
+		is_Attacking = false
+		
+	
 
 func _draw():
 	if draw_potion_hint:
@@ -129,3 +145,15 @@ func _on_hitbox_component_area_entered(area):
 
 func _on_spell_timer_timeout():
 	can_cast = true
+
+
+func _on_pointy_stick_area_entered(area):
+	if area.name == "HitboxComponent" \
+	and  is_Attacking == true:
+		$HealthComponent.take_damage($PointyStick/AttackComponent.damage, "Something")
+		print($HealthComponent.health)
+		if $HealthComponent.health <= 0:
+			current_health += 5
+			health_progress -= 5
+			$HealthBar.set_value(health_progress)
+			print(current_health)

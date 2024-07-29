@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dntwc4ecx5goy"]
+[gd_scene load_steps=49 format=3 uid="uid://dntwc4ecx5goy"]
 
 [ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_f5x2b"]
 [ext_resource type="PackedScene" uid="uid://bx5urub324ieo" path="res://Scenes/component_health.tscn" id="3_ut6th"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b27f12hhekm8r" path="res://Scenes/healthabr.tscn" id="5_p280s"]
 [ext_resource type="Texture2D" uid="uid://bqvii7dowmwha" path="res://Assets/player_animation.png" id="6_pomfh"]
 [ext_resource type="PackedScene" uid="uid://bg5o48iug614v" path="res://Scenes/pointy_stick.tscn" id="7_p8dhy"]
+[ext_resource type="Script" path="res://Scripts/component_attack.gd" id="8_8sput"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kupff"]
 size = Vector2(18, 18)
@@ -296,34 +297,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_0kvhd"]
-resource_name = "Attack_Left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PointyStick:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-1.13446, -3.22886]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PointyStick:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-8.82065, -1.01327), Vector2(-8.821, 4.317)]
-}
-
 [sub_resource type="Animation" id="Animation_c4xht"]
 length = 0.001
 tracks/0/type = "value"
@@ -336,7 +309,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-1.13446]
+"values": [-2.35619]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -348,12 +321,40 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-8.82065, -1.01327)]
+"values": [Vector2(-9.53674e-07, 13)]
+}
+
+[sub_resource type="Animation" id="Animation_0kvhd"]
+resource_name = "Attack_Save_Me"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointyStick:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-2.35619, -3.92699, -5.49779, -7.06858, -8.63938]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointyStick:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-19, 0), Vector2(-4.76837e-07, 19), Vector2(19, 0), Vector2(4.91738e-07, -19), Vector2(-19, 4.76837e-07)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pm84k"]
 _data = {
-"Attack_Left": SubResource("Animation_0kvhd"),
+"Attack_Save_Me": SubResource("Animation_0kvhd"),
 "RESET": SubResource("Animation_c4xht")
 }
 
@@ -410,9 +411,11 @@ libraries = {
 }
 
 [node name="PointyStick" parent="." instance=ExtResource("7_p8dhy")]
-position = Vector2(-8.82065, -1.01327)
-rotation = -1.13446
+position = Vector2(-9.53674e-07, 13)
+rotation = -2.35619
+script = ExtResource("8_8sput")
 
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
+[connection signal="area_entered" from="PointyStick" to="." method="_on_pointy_stick_area_entered"]

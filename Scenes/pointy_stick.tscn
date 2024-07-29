@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bg5o48iug614v"]
+[gd_scene load_steps=5 format=3 uid="uid://bg5o48iug614v"]
 
 [ext_resource type="Texture2D" uid="uid://d3j4dao83c8rn" path="res://Assets/sword_player.png" id="1_eq1n7"]
+[ext_resource type="PackedScene" uid="uid://bnvc66ohoh8v5" path="res://Scenes/component_attack.tscn" id="2_yjhap"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ienid"]
 size = Vector2(3.27665, 9.8514)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bpma"]
+size = Vector2(2.91421, 9.94975)
+
 [node name="PointyStick" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)
@@ -17,3 +23,11 @@ position = Vector2(5, -5)
 rotation = 0.785398
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ienid")
+
+[node name="AttackComponent" parent="." instance=ExtResource("2_yjhap")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
+position = Vector2(5, -5)
+rotation = 0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_6bpma")
